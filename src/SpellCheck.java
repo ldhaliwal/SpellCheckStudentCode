@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 
 /**
  * Spell Check
@@ -21,22 +24,20 @@ public class SpellCheck {
     public String[] checkWords(String[] text, String[] dictionary) {
 
         // make a forest of words from the dictionary (can probably be done in another method)
-        for (String word : dictionary){
-            if (){
+        HashSet<String> dictSet = new HashSet<>();
+        Collections.addAll(dictSet, dictionary);
 
-            }
-            else{
+        String[] cleanedText = cleanUpText(text).toArray(new String[0]);
 
+        ArrayList<String> misspelledWords = new ArrayList<>();
+        for (String word : cleanedText) {
+            if (!dictSet.contains(word) ) {
+                misspelledWords.add(word); // Add to result list if misspelled and not already added.
             }
         }
-            // if a word starts with the root of any existing cluster
-                // cycle through each root of a cluster until the word contains the root
-                // follow the edges down until the end of a path or there are no other nodes that work to go down
-                // add the word there
-            //else
-                //make it the root of a new cluster
-
-        return null;
+        //System.out.println(Arrays.toString(misspelledWords.toArray(new String[0])));
+        System.out.println(misspelledWords.size());
+        return misspelledWords.toArray(new String[0]);
     }
 
 
@@ -51,8 +52,6 @@ public class SpellCheck {
                 newText.add(word);
             }
         }
-
         return newText;
     }
-
 }
