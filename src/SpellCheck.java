@@ -23,35 +23,59 @@ public class SpellCheck {
      */
     public String[] checkWords(String[] text, String[] dictionary) {
 
-        // make a forest of words from the dictionary (can probably be done in another method)
-        HashSet<String> dictSet = new HashSet<>();
-        Collections.addAll(dictSet, dictionary);
+        // TST solution:
 
-        String[] cleanedText = cleanUpText(text).toArray(new String[0]);
+        // Create a TST for the dictionary
+        TST dict_trie = new TST();
 
-        ArrayList<String> misspelledWords = new ArrayList<>();
-        for (String word : cleanedText) {
-            if (!dictSet.contains(word) ) {
-                misspelledWords.add(word); // Add to result list if misspelled and not already added.
+        for (String word : dictionary) {
+            dict_trie.insertHelper(word);
+        }
+
+        // Create a TST for the misspelled words
+        TST misspelledWords = new TST();
+        ArrayList<String> finalMisspelledWords = new ArrayList<>();
+
+        // for each word in text:
+        for (String word: text) {
+            // if not in dictionary TST and not in misspelled TST, add the word to misspelled TST
+            if (!dict_trie.lookupHelper(word) && !misspelledWords.lookupHelper(word)) {
+                misspelledWords.insertHelper(word);
+                finalMisspelledWords.add(word);
             }
         }
-        //System.out.println(Arrays.toString(misspelledWords.toArray(new String[0])));
-        System.out.println(misspelledWords.size());
-        return misspelledWords.toArray(new String[0]);
-    }
+        // Convert it back to an array
+        // return the array
+        System.out.println(finalMisspelledWords.size());
+        String[] misspelled = finalMisspelledWords.toArray(new String[0]);
+        return misspelled;
 
 
-    //condense the inputted text into single instances of words
-        // for string word in text
-        // if word not in condensed text, add into new array
-    public ArrayList<String> cleanUpText(String[] text){
-        ArrayList <String> newText = new ArrayList <String>();
 
-        for (String word : text) {
-            if (!newText.contains(word)) {
-                newText.add(word);
-            }
-        }
-        return newText;
+        // Trie solution:
+//        // Create a trie representation of the dictionary and add each word in the dictionary to it
+//        Trie dict = new Trie();
+//        for (String word : dictionary){
+//            dict.insert(word);
+//        }
+//
+//        // Create a trie for easier misspelled word lookup
+//        Trie misspelledWords = new Trie();
+//        ArrayList<String> finalMisspelledWords = new ArrayList<>();
+//
+//
+//        // Go through each word in the text, and if it isn't in the dictionary
+//        // and not in the list of misspelled words, add it to the list
+//        for (String word : text){
+//            if(!dict.lookup(word) && !misspelledWords.lookup(word)){
+//                misspelledWords.insert(word);
+//                finalMisspelledWords.add(word);
+//            }
+//        }
+//
+//        // Convert back to an array and return the misspelled words
+//        System.out.println(finalMisspelledWords.size());
+//        String[] misspelled = finalMisspelledWords.toArray(new String[0]);
+//        return misspelled;
     }
 }
