@@ -39,11 +39,11 @@ public class TST {
             // If it's the last character, mark the current node as a word
             if (index + 1 == s.length()) {
                 current.setWord();
-            } else {
+            }
+            else {
                 current.setCenter(insert(current.getCenter(), s, index + 1));
             }
         }
-
         return current;
     }
 
@@ -72,7 +72,7 @@ public class TST {
 
         // If the characters are equal
         else {
-            // If we've reached the end of the string, check if it's a word
+            // If we're at the end of the string, check if it's a word
             if (index == s.length() - 1) {
                 return current.isWord();
             }

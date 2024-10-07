@@ -22,9 +22,7 @@ public class SpellCheck {
      * @return String[] of all mispelled words in the order they appear in text. No duplicates.
      */
     public String[] checkWords(String[] text, String[] dictionary) {
-
         // TST solution:
-
         // Create a TST for the dictionary
         TST dict_trie = new TST();
 
@@ -44,15 +42,12 @@ public class SpellCheck {
                 finalMisspelledWords.add(word);
             }
         }
-        // Convert it back to an array
-        // return the array
-        System.out.println(finalMisspelledWords.size());
-        String[] misspelled = finalMisspelledWords.toArray(new String[0]);
-        return misspelled;
+
+        // Convert it back to an array and return
+        return finalMisspelledWords.toArray(new String[0]);
 
 
-
-        // Trie solution:
+         //Trie solution:
 //        // Create a trie representation of the dictionary and add each word in the dictionary to it
 //        Trie dict = new Trie();
 //        for (String word : dictionary){
@@ -74,8 +69,6 @@ public class SpellCheck {
 //        }
 //
 //        // Convert back to an array and return the misspelled words
-//        System.out.println(finalMisspelledWords.size());
-//        String[] misspelled = finalMisspelledWords.toArray(new String[0]);
-//        return misspelled;
+//        return finalMisspelledWords.toArray(new String[0]);
     }
 }
